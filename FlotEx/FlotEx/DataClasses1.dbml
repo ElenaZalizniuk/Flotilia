@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FISHCO" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-CT661R7;Initial Catalog=FISHCO;Integrated Security=True" SettingsObjectName="FlotEx.Properties.Settings" SettingsPropertyName="FISHCOConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Bank" Member="Bank">
+    <Type Name="Bank">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Bank_BankAttend" Member="BankAttend" ThisKey="ID" OtherKey="ID_BANK" Type="BankAttend" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BankAttend" Member="BankAttend">
+    <Type Name="BankAttend">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_BANK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_CRUISE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ENTRY" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="OUTBANK" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="BankAttend_Fishing" Member="Fishing" ThisKey="ID" OtherKey="ID_BANKATTEND" Type="Fishing" />
+      <Association Name="Bank_BankAttend" Member="Bank" ThisKey="ID_BANK" OtherKey="ID" Type="Bank" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Cruise_BankAttend" Member="Cruise" ThisKey="ID_CRUISE" OtherKey="ID" Type="Cruise" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Boats" Member="Boats">
+    <Type Name="Boats">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_TYPE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_DISPLACE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CONSTRDATE" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Boats_Cruise" Member="Cruise" ThisKey="ID" OtherKey="ID_BOAT" Type="Cruise" />
+      <Association Name="BoatType_Boats" Member="BoatType" ThisKey="ID_TYPE" OtherKey="ID" Type="BoatType" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Displacement_Boats" Member="Displacement" ThisKey="ID_DISPLACE" OtherKey="ID" Type="Displacement" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BoatType" Member="BoatType">
+    <Type Name="BoatType">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="BoatType_Boats" Member="Boats" ThisKey="ID" OtherKey="ID_TYPE" Type="Boats" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Displacement" Member="Displacement">
+    <Type Name="Displacement">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Displacement_Boats" Member="Boats" ThisKey="ID" OtherKey="ID_DISPLACE" Type="Boats" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Command" Member="Command">
+    <Type Name="Command">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FIRSTNAME" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="LASTNAME" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="ID_POS" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_CAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_CITY" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ADDRESS" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Command_Cruise" Member="Cruise" ThisKey="ID" OtherKey="ID_CAP" Type="Cruise" />
+      <Association Name="Cities_Command" Member="Cities" ThisKey="ID_CITY" OtherKey="ID" Type="Cities" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Position_Command" Member="Position" ThisKey="ID_POS" OtherKey="ID" Type="Position" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cities" Member="Cities">
+    <Type Name="Cities">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CITY" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Cities_Command" Member="Command" ThisKey="ID" OtherKey="ID_CITY" Type="Command" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Cruise" Member="Cruise">
+    <Type Name="Cruise">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_BOAT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_CAP" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ARRIVAL" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="DEPART" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Cruise_BankAttend" Member="BankAttend" ThisKey="ID" OtherKey="ID_CRUISE" Type="BankAttend" />
+      <Association Name="Boats_Cruise" Member="Boats" ThisKey="ID_BOAT" OtherKey="ID" Type="Boats" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Command_Cruise" Member="Command" ThisKey="ID_CAP" OtherKey="ID" Type="Command" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fish" Member="Fish">
+    <Type Name="Fish">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Fish_Fishing" Member="Fishing" ThisKey="ID" OtherKey="ID_FISH" Type="Fishing" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Fishing" Member="Fishing">
+    <Type Name="Fishing">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_BANKATTEND" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_FISH" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="WEIGHT" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Q" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="BankAttend_Fishing" Member="BankAttend" ThisKey="ID_BANKATTEND" OtherKey="ID" Type="BankAttend" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Fish_Fishing" Member="Fish" ThisKey="ID_FISH" OtherKey="ID" Type="Fish" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="Quality_Fishing" Member="Quality" ThisKey="ID_Q" OtherKey="ID" Type="Quality" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Position" Member="Position">
+    <Type Name="Position">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Association Name="Position_Command" Member="Command" ThisKey="ID" OtherKey="ID_POS" Type="Command" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Quality" Member="Quality">
+    <Type Name="Quality">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NAME" Type="System.String" DbType="NChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="Quality_Fishing" Member="Fishing" ThisKey="ID" OtherKey="ID_Q" Type="Fishing" />
+    </Type>
+  </Table>
+</Database>

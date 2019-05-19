@@ -1,0 +1,9 @@
+D:\DB\FlotEx\FlotEx\FlotEx\bin\Debug\FlotEx.exe.config
+D:\DB\FlotEx\FlotEx\FlotEx\bin\Debug\FlotEx.exe
+D:\DB\FlotEx\FlotEx\FlotEx\bin\Debug\FlotEx.pdb
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.csprojResolveAssemblyReference.cache
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.Form1.resources
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.Properties.Resources.resources
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.csproj.GenerateResource.Cache
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.exe
+D:\DB\FlotEx\FlotEx\FlotEx\obj\Debug\FlotEx.pdb
